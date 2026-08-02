@@ -1,0 +1,6 @@
+{
+  "name": "HakotSwift",
+  "description": "A hauling services website for Metro Manila featuring an instant quote calculator and booking calendar.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
