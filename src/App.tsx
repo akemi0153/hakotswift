@@ -14,6 +14,7 @@ import FAQ from './components/FAQ';
 import WhatsAppButton from './components/WhatsAppButton';
 import TopLoadingBar from './components/TopLoadingBar';
 import { motion } from 'motion/react';
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App() {
   return (
@@ -118,6 +119,7 @@ export default function App() {
       
       <Footer />
       <WhatsAppButton />
+      <Analytics />
     </div>
   );
 }
