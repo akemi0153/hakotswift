@@ -13,6 +13,8 @@ import ServiceMap from './components/ServiceMap';
 import FAQ from './components/FAQ';
 import WhatsAppButton from './components/WhatsAppButton';
 import TopLoadingBar from './components/TopLoadingBar';
+import Gallery from './components/Gallery';
+import ScrollToTop from './components/ScrollToTop';
 import { motion } from 'motion/react';
 import { Analytics } from "@vercel/analytics/react";
 
@@ -82,6 +84,17 @@ export default function App() {
             <Services />
           </motion.div>
 
+          {/* Gallery */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+            className="md:col-span-12 mt-4"
+          >
+            <Gallery />
+          </motion.div>
+
           {/* Map and Booking Side-by-side */}
           <div className="md:col-span-12 grid grid-cols-1 md:grid-cols-12 gap-4 mt-4">
             <motion.div 
@@ -119,6 +132,7 @@ export default function App() {
       
       <Footer />
       <WhatsAppButton />
+      <ScrollToTop />
       <Analytics />
     </div>
   );
