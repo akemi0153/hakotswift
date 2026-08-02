@@ -13,7 +13,7 @@ const services = [
     title: 'Appliance Disposal',
     description: 'Responsible and eco-friendly disposal of old refrigerators, washing machines, and other large appliances.',
     icon: Trash2,
-    image: 'https://images.unsplash.com/photo-1588607144962-79010077873a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     startingPrice: '₱1,200'
   },
   {
