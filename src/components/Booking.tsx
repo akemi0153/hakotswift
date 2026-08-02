@@ -1,13 +1,22 @@
 import { useState } from 'react';
-import { CheckCircle2, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import SuccessModal from './SuccessModal';
+
+interface BookingDetails {
+  trackingId: string;
+  date: string;
+  time: string;
+  name: string;
+  address: string;
+}
 
 export default function Booking() {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
-  const [showToast, setShowToast] = useState(false);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [bookingDetails, setBookingDetails] = useState<BookingDetails | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -15,7 +24,17 @@ export default function Booking() {
     
     setTimeout(() => {
       window.dispatchEvent(new Event('stop-loading'));
-      setShowToast(true);
+      
+      const newBookingDetails = {
+        trackingId: 'HKT-' + Math.random().toString(36).substr(2, 9).toUpperCase(),
+        date,
+        time,
+        name,
+        address
+      };
+      
+      setBookingDetails(newBookingDetails);
+      setIsModalOpen(true);
       
       // Reset form
       setDate('');
@@ -23,9 +42,6 @@ export default function Booking() {
       setName('');
       setAddress('');
       
-      setTimeout(() => {
-        setShowToast(false);
-      }, 5000);
     }, 1500);
   };
 
@@ -99,31 +115,11 @@ export default function Booking() {
         </button>
       </form>
 
-      <AnimatePresence>
-        {showToast && (
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.9 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="fixed bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 z-50 bg-zinc-900 text-white px-6 py-4 rounded-2xl shadow-xl flex items-center gap-4 min-w-[320px]"
-          >
-            <div className="bg-green-500/20 text-green-400 p-2 rounded-full shrink-0">
-              <CheckCircle2 className="w-5 h-5" />
-            </div>
-            <div className="flex-1">
-              <h4 className="font-bold text-sm">Booking Request Sent</h4>
-              <p className="text-xs text-zinc-400">We'll contact you shortly to confirm.</p>
-            </div>
-            <button 
-              type="button" 
-              onClick={() => setShowToast(false)} 
-              className="text-zinc-400 hover:text-white transition-colors shrink-0"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <SuccessModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        details={bookingDetails} 
+      />
     </div>
   );
 }
